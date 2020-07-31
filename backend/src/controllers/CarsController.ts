@@ -1,19 +1,19 @@
 /* eslint-disable max-len */
 /* eslint-disable indent */
-import database from '../../database/frostFree.json';
+import database from '../../database/cars.json';
 
-import sortRefrigeratorsByConsume from './utils/sortRefrigeratorsByConsume';
+import sortCarsByMilesPerGallon from './utils/sortCarsByMilesPerGallon';
 
 interface IndexConfig {
   page: number;
   max: number;
 }
 
-class ListController {
+class CarsController {
   index({ page, max } : IndexConfig) {
     let filterByConsume = database.sort(
 
-      (a, b) => sortRefrigeratorsByConsume(a as unknown as Refrigerator, b as unknown as Refrigerator),
+      (a, b) => sortCarsByMilesPerGallon(a as unknown as Car, b as unknown as Car),
 
     );
 
@@ -23,4 +23,4 @@ class ListController {
   }
 }
 
-export default new ListController();
+export default new CarsController();

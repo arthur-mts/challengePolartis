@@ -8,14 +8,14 @@ router.get('/refrigerators', (req, res) => {
   const max = Number(req.query.max) || 10;
   const page = Number(req.query.page) || 0;
   const refrigerators = RefrigeratorController.index({ page, max });
-  return res.json({ max, page, refrigerators });
+  return res.json({ max, page, data: refrigerators });
 });
 
 router.get('/cars', (req, res) => {
   const max = Number(req.query.max) || 10;
   const page = Number(req.query.page) || 0;
   const cars = CarsController.index({ page, max });
-  return res.json({ max, page, cars });
+  return res.json({ max, page, data: cars });
 });
 
 export default router;

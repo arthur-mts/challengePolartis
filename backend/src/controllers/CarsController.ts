@@ -6,20 +6,22 @@ import sortCarsByMilesPerGallon from './utils/sortCarsByMilesPerGallon';
 
 interface IndexConfig {
   page: number;
-  max: number;
+  length: number;
 }
 
 class CarsController {
-  index({ page, max } : IndexConfig) {
-    let filterByConsume = database.sort(
+  index({ page, length } : IndexConfig) {
+    let filteredCars = database.sort(
 
       (a, b) => sortCarsByMilesPerGallon(a as unknown as Car, b as unknown as Car),
 
     );
 
-    filterByConsume = filterByConsume.slice(max * page, max * (page + 1));
+    const numberOfPages = Math.floor(filteredCars.length / length);
 
-    return filterByConsume;
+    filteredCars = filteredCars.slice(length * page, length * (page + 1));
+
+    return { filteredCars, pages: numberOfPages };
   }
 }
 

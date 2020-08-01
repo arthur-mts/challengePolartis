@@ -6,20 +6,22 @@ import sortRefrigeratorsByConsume from './utils/sortRefrigeratorsByConsume';
 
 interface IndexConfig {
   page: number;
-  max: number;
+  length: number;
 }
 
 class ListController {
-  index({ page, max } : IndexConfig) {
-    let filterByConsume = database.sort(
+  index({ page, length } : IndexConfig) {
+    let filteredRefrigerators = database.sort(
 
       (a, b) => sortRefrigeratorsByConsume(a as unknown as Refrigerator, b as unknown as Refrigerator),
 
     );
 
-    filterByConsume = filterByConsume.slice(max * page, max * (page + 1));
+    const numberOfPages = Math.floor(filteredRefrigerators.length / length);
 
-    return filterByConsume;
+    filteredRefrigerators = filteredRefrigerators.slice(length * page, length * (page + 1));
+
+    return { filteredRefrigerators, pages: numberOfPages };
   }
 }
 

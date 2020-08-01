@@ -17,10 +17,10 @@ const Home: React.FC = () => {
 
   const handleClick = useCallback(async (field: 'cars' | 'refrigerators') => {
     setContentType(undefined);
+    setPage(0);
     const { data } = await api.get(`${field}?page=${page}`);
     setFetchedData(data.data);
     setPageLimit(data.numberOfPages);
-    setPage(0);
     setContentType(field);
   }, [contentType, setContentType, setFetchedData, page, setPage, setPageLimit]);
 

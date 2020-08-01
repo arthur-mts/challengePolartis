@@ -5,15 +5,24 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   display: flex;
+  @media(max-width: 600px){
+    flex-direction: column;
+    & > div {
+      margin: 0px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+  }
 `;
 
-export const Content = styled.div`
+export const Buttons = styled.div`
   display: flex;
   flex-direction: column;
   button + button {
     margin-top: 20px;
   }
   margin-left: 20px;
+  margin-right: 80px;
 `;
 
 export const Button = styled.button`
@@ -32,16 +41,16 @@ export const Button = styled.button`
 
 export const Response = styled.ol`
   list-style: none;
-  max-height: 80%;
-  overflow:scroll;
-  margin-right: 20px;
+  overflow:auto;
+  
   li + li {
     margin-top: 12px; 
   }
+
+
 `;
 
 export const Item = styled.li`
-  width: 480px;
   padding: 8px;
   border-color: #ccc;
   border-radius: 6px;
@@ -56,5 +65,30 @@ export const Item = styled.li`
   p{
     margin-top: 4px;
     font-size: 14px;
+  }
+`;
+
+export const NavigationBar = styled.div<{isVisible: boolean}>`
+  ${({ isVisible }) => css`
+    display: ${isVisible ? 'flex' : 'none'};
+  `}
+  flex: 1;
+  justify-content: space-between;
+  margin-top: 20px;
+
+  svg {
+    cursor: pointer;
+  }
+`;
+
+export const Content = styled.div`
+  align-items: center;
+  max-height: 90%;
+  overflow: scroll;
+  flex: 1;
+  max-width: 700px;
+  margin-right: 20px;
+  @media(max-width: 600px){
+    width: 80%;
   }
 `;

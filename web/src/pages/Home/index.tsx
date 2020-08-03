@@ -22,7 +22,7 @@ const Home: React.FC = () => {
     setFetchedData(data.data);
     setPageLimit(data.numberOfPages);
     setContentType(field);
-  }, [contentType, setContentType, setFetchedData, page, setPage, setPageLimit]);
+  }, [setContentType, setFetchedData, page, setPage, setPageLimit]);
 
   const handleNextPage = useCallback(async () => {
     const { data } = await api.get(`${contentType}?page=${page + 1}`);
